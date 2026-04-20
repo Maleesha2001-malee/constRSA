@@ -1,126 +1,91 @@
-# \# ConstRSA
+# ConstRSA
 
-# 
 
-# > Design and Statistical Validation of a Minimal Constant-Time RSA-512 Digital Signature on Standard Consumer Laptops
 
-# 
+## Design and Statistical Validation of a Minimal Constant-Time RSA-512 Digital Signature on Standard Consumer Laptops
 
-# \*\*Author:\*\* R.M.S. Rathnayake (2020/ICT/47)  
+### Author: R.M.S. Rathnayake (2020/ICT/47)  
 
-# \*\*University:\*\* University of Vavuniya, Sri Lanka  
+### University: University of Vavuniya, Sri Lanka  
 
-# \*\*Supervisors:\*\* Mr. B. Yogarajah, Dr. S. Kirushanth, Mr. K. Mathanaharan
+### Supervisors: Mr. B. Yogarajah, Dr. S. Kirushanth, Mr. K. Mathanaharan
 
-# 
+
 
 # \---
 
-# 
 
-# \## Research Aim
 
-# 
+## Research Aim
 
-# To design, implement, and statistically validate a minimal constant-time RSA-512 digital signature (RSA-PSS with SHA-256) suitable for testing on standard consumer laptops.
 
-# 
 
-# \## Algorithm
+### To design, implement, and statistically validate a minimal constant-time RSA-512 digital signature (RSA-PSS with SHA-256) suitable for testing on standard consumer laptops.
 
 # 
 
-# \- Constant-time modular exponentiation (square-and-multiply-always)
+## Algorithm
 
-# \- Branchless selection via arithmetic masking
+<img width="777" height="639" alt="image" src="https://github.com/user-attachments/assets/225406a4-c9ac-455f-ab21-6d14c35f16d2" />
 
-# \- CRT optimization for signing
 
-# \- Welch's t-test for timing-leak verification
+### \- Constant-time modular exponentiation (square-and-multiply-always)
 
-# 
+### \- Branchless selection via arithmetic masking
 
-# \## Constant-time Design
+### \- CRT optimization for signing
 
-# 
+### \- Welch's t-test for timing-leak verification
 
-# No secret-dependent branches. No secret-dependent memory access. Result selection uses bitwise masking instead of if-statements.
 
-# 
 
-\## Repository Structure
+## Constant-time Design
 
-constrsa/
-===
+#### No secret-dependent branches. No secret-dependent memory access. Result selection uses bitwise masking instead of if-statements.
 
-# ├── src/
+## Repository Structure
 
-# │   └── constrsa.c       # RSA implementation
+#### constrsa/
 
-# ├── tests/
 
-# │   └── analysis.py      # Welch's t-test analysis
+#### ├── src/
 
-# ├── data/
+#### │   └── constrsa.c       # RSA implementation
 
-# │   └── timing\_data.csv  # Timing measurements
+#### ├── tests/
 
-# ├── docs/
+#### │   └── analysis.py      # Welch's t-test analysis
 
-# │   └── timing\_chart.png # Results visualization
+#### ├── data/
 
-└── README.md
+#### │   └── timing\_data.csv  # Timing measurements
+
+#### ├── docs/
+
+#### │   └── timing\_chart.png # Results visualization
+
+#### └── README.md
 
 ## How to Build and Run
-===
 
-# 
+#### ```bash
 
-# ```bash
+#### gcc -O2 -o constrsa src/constrsa.c
 
-# gcc -O2 -o constrsa src/constrsa.c
+#### ./constrsa
 
-# ./constrsa
+##### ```
 
-# ```
+ 
 
-# 
+### How to Run Analysis
 
-# \## How to Run Analysis
+#### ```bash
 
-# 
+#### python tests/analysis.py
 
-# ```bash
+#### ```
 
-# python tests/analysis.py
 
-# ```
 
-# 
-
-# \## Results
-
-# 
-
-# | Implementation | Mean (ns) | p-value | Leak? |
-
-# |---|---|---|---|
-
-# | Constant-time Fixed  | 2468.6 | \~0.000 | No (OS noise) |
-
-# | Constant-time Random | 2462.1 | \~0.000 | No (OS noise) |
-
-# | Naive Fixed          | 1565.6 | \~0.000 | YES |
-
-# | Naive Random         | 1877.4 | \~0.000 | YES |
-
-# 
-
-# \## Files Produced
-
-# 
-
-# \- `data/timing\_data.csv` — 40,000 timing measurements
-
-# \- `docs/timing\_chart.png` — Distribution histogramss
 
