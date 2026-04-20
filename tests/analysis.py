@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 # ── Data load කරන්න ──
-df = pd.read_csv("C:\\constrsa\\timing_data.csv")
+df = pd.read_csv("data\\timing_data.csv")
 print(f"Total rows: {len(df)}")
 print(df.head(10))
 
@@ -69,6 +69,6 @@ axes[1].set_ylabel("Count")
 axes[1].legend()
 
 plt.tight_layout()
-plt.savefig("C:\\constrsa\\timing_chart.png", dpi=150)
+plt.savefig("docs\\timing_chart.png", dpi=150)
 plt.show()
 print("\nChart saved: C:\\constrsa\\timing_chart.png")
