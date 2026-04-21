@@ -3,12 +3,10 @@ from scipy import stats
 import matplotlib.pyplot as plt
 import numpy as np
 
-# ── Data load කරන්න ──
 df = pd.read_csv("data\\timing_data.csv")
 print(f"Total rows: {len(df)}")
 print(df.head(10))
 
-# ── Outliers ඉවත් කරන්න (top 1%) ──
 df = df[df["time_ns"] < df["time_ns"].quantile(0.99)]
 
 # ── Constant-time: fixed vs random ──
@@ -48,7 +46,7 @@ print(f"{'CT Random':30s} {ct_random.mean():>10.1f} {ct_random.median():>10.1f} 
 print(f"{'Naive Fixed':30s} {nv_fixed.mean():>10.1f} {nv_fixed.median():>10.1f} {nv_fixed.std():>10.1f}")
 print(f"{'Naive Random':30s} {nv_random.mean():>10.1f} {nv_random.median():>10.1f} {nv_random.std():>10.1f}")
 
-# ── Chart එක හදන්න ──
+
 fig, axes = plt.subplots(1, 2, figsize=(12, 5))
 fig.suptitle("ConstRSA: Timing Distribution — Fixed vs Random Input", fontsize=13)
 
