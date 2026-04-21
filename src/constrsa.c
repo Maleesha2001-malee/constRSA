@@ -259,7 +259,7 @@ int main(void)
     printf("[Verify] result    : %s\n\n", ok ? "VALID ✓" : "INVALID ✗");
 
     /* ── Timing Experiment → CSV ── */
-    int RUNS = 10000;
+    int RUNS = 50000;
     u64 exp_fixed  = key.d;
     u64 base       = simple_hash(msg) % key.n;
     u64 n          = key.n;

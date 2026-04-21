@@ -1,0 +1,7 @@
+metric,value
+ml_accuracy,1.0
+verification_rate,1.0
+t_statistic,-1.7231393877212806
+p_value,0.08486645599116907
+fixed_mean_ns,2460.730427028232
+random_mean_ns,2461.355567727669
