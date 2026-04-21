@@ -6,9 +6,6 @@
  *   - Real SHA-256 hashing
  *   - RSA-PSS signing and verification
  *   - Constant-time operations (RSA_FLAG_NO_BLINDING disabled)
- *
- * Author  : R.M.S. Rathnayake (2020/ICT/47)
- * Dept    : Physical Science, University of Vavuniya
  */
 
 #include <stdio.h>
@@ -43,9 +40,7 @@ static void print_errors(void)
                 ERR_error_string(err, NULL));
 }
 
-/* ══════════════════════════════════════════
- * SECTION 1: RSA-512 Key Generation
- * ══════════════════════════════════════════ */
+/* SECTION 1: RSA-512 Key Generation*/
 EVP_PKEY *rsa512_keygen(void)
 {
     printf("[KeyGen] Generating RSA-512 key pair...\n");
@@ -88,10 +83,10 @@ EVP_PKEY *rsa512_keygen(void)
     return pkey;
 }
 
-/* ══════════════════════════════════════════
+/* 
  * SECTION 2: RSA-PSS Signing (SHA-256)
  * Constant-time via OpenSSL blinding
- * ══════════════════════════════════════════ */
+ */
 int rsa512_sign(EVP_PKEY *pkey,
                 const unsigned char *msg, size_t msg_len,
                 unsigned char **sig, size_t *sig_len)
@@ -139,9 +134,7 @@ int rsa512_sign(EVP_PKEY *pkey,
     return 1;
 }
 
-/* ══════════════════════════════════════════
- * SECTION 3: RSA-PSS Verification
- * ══════════════════════════════════════════ */
+/* SECTION 3: RSA-PSS Verification */
 int rsa512_verify(EVP_PKEY *pkey,
                    const unsigned char *msg, size_t msg_len,
                    const unsigned char *sig, size_t sig_len)
@@ -173,9 +166,7 @@ int rsa512_verify(EVP_PKEY *pkey,
     return (result == 1) ? 1 : 0;
 }
 
-/* ══════════════════════════════════════════
- * SECTION 4: Timing experiment → CSV
- * ══════════════════════════════════════════ */
+/* SECTION 4: Timing experiment → CSV */
 void timing_experiment(EVP_PKEY *pkey, int runs)
 {
     printf("[Timing] Collecting %d runs...\n", runs);
@@ -227,16 +218,12 @@ void timing_experiment(EVP_PKEY *pkey, int runs)
     printf("[Timing] CSV saved: data\\timing_512.csv\n\n");
 }
 
-/* ══════════════════════════════════════════
- * Main
- * ══════════════════════════════════════════ */
+/* Main*/
 int main(void)
 {
-    printf("=============================================\n");
+    printf("\n");
     printf("  ConstRSA — Real 512-bit RSA-PSS + SHA-256\n");
-    printf("  Author: R.M.S. Rathnayake (2020/ICT/47)\n");
-    printf("  University of Vavuniya, Sri Lanka\n");
-    printf("=============================================\n\n");
+    printf("\n\n");
 
     /* Generate RSA-512 key */
     EVP_PKEY *pkey = rsa512_keygen();
@@ -293,9 +280,8 @@ int main(void)
     free(sig);
     EVP_PKEY_free(pkey);
 
-    printf("=============================================\n");
     printf("  Done! Check data\\timing_512.csv\n");
-    printf("=============================================\n");
+    
 
     return 0;
 }
