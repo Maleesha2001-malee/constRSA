@@ -126,9 +126,9 @@ void run_test(const char *test_name, int result, int expected)
 /* ── Main ── */
 int main(void)
 {
-    printf("╔══════════════════════════════════════════╗\n");
-    printf("║  ConstRSA — Signature Verification Tests ║\n");
-    printf("╚══════════════════════════════════════════╝\n\n");
+    printf("\n");
+    printf("ConstRSA — Signature Verification Tests\n");
+    printf("\n\n");
 
     RSAKey key;
     rsa_keygen(&key, 999983ULL, 999979ULL);
@@ -190,14 +190,14 @@ int main(void)
     }
 
     /* ── Summary ── */
-    printf("\n══════════════════════════════════════════\n");
+    printf("\n");
     printf("  Total : %d   Passed : %d   Failed : %d\n",
            passed + failed, passed, failed);
     if (failed == 0)
         printf("  All tests PASSED ✓\n");
     else
         printf("  Some tests FAILED ✗\n");
-    printf("══════════════════════════════════════════\n");
+    printf("\n");
 
     return (failed == 0) ? 0 : 1;
 }
