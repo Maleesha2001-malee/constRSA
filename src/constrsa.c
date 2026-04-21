@@ -1,25 +1,5 @@
 /*
  * constrsa.c — ConstRSA: Minimal Constant-Time RSA-512
- * =====================================================
- * Research artifact for:
- *   "ConstRSA: Design and Statistical Validation of a
- *    Minimal Constant-Time RSA-512 Digital Signature
- *    on Standard Consumer Laptops"
- *
- * Author  : R.M.S. Rathnayake (2020/ICT/47)
- * Dept    : Physical Science, University of Vavuniya
- *
- * What this file does:
- *   1. RSA-512 key generation (small primes for demo)
- *   2. Constant-time modular exponentiation (ct_mod_exp)
- *   3. Naive baseline modular exponentiation (naive_mod_exp)
- *   4. RSA-PSS signing and verification (simplified)
- *   5. Fixed-vs-random timing experiment → CSV output
- *
- * Constant-time guarantees:
- *   - No secret-dependent branches
- *   - No secret-dependent memory access
- *   - Branchless selection via arithmetic masking
  */
 
 #include <stdio.h>
@@ -31,9 +11,7 @@
 typedef uint64_t u64;
 typedef unsigned __int128 u128;
 
-/* ═══════════════════════════════════════════════
- * SECTION 1: Constant-time utilities
- * ═══════════════════════════════════════════════ */
+/*  SECTION 1: Constant-time utilities*/
 
 /*
  * ct_select: branchless selector
@@ -55,21 +33,11 @@ static inline u64 mulmod(u64 a, u64 b, u64 m)
     return (u128)a * b % m;
 }
 
-/* ═══════════════════════════════════════════════
- * SECTION 2: Modular exponentiation
- * ═══════════════════════════════════════════════ */
+/*SECTION 2: Modular exponentiation*/
 
 /*
  * ct_mod_exp: CONSTANT-TIME modular exponentiation
  * Computes base^exp mod n
- *
- * Algorithm: square-and-multiply-always
- *   - Always squares (unconditional)
- *   - Always multiplies (unconditional)
- *   - Uses ct_select to pick result — no branch on secret bit
- *
- * Constant-time: YES
- * Timing leak:   NO (verified by Welch's t-test)
  */
 u64 ct_mod_exp(u64 base, u64 exp, u64 n)
 {
@@ -94,12 +62,7 @@ u64 ct_mod_exp(u64 base, u64 exp, u64 n)
 
 /*
  * naive_mod_exp: NON-CONSTANT-TIME baseline
- * Computes base^exp mod n
- *
- * INSECURE: skips multiply when bit=0
- * Timing leak: YES — detectable by Welch's t-test
- * Use ONLY for performance comparison
- */
+ * Computes base^exp mod n */
 u64 naive_mod_exp(u64 base, u64 exp, u64 n)
 {
     u64 R = 1;
@@ -114,9 +77,7 @@ u64 naive_mod_exp(u64 base, u64 exp, u64 n)
     return R;
 }
 
-/* ═══════════════════════════════════════════════
- * SECTION 3: RSA Key structure
- * ═══════════════════════════════════════════════ */
+/*  SECTION 3: RSA Key structure */
 
 typedef struct {
     u64 n;   /* modulus         */
@@ -171,9 +132,7 @@ void rsa_keygen(RSAKey *key, u64 p, u64 q)
     printf("[KeyGen] dq = %llu (CRT)\n", key->dq);
 }
 
-/* ═══════════════════════════════════════════════
- * SECTION 4: RSA-PSS Signing (simplified)
- * ═══════════════════════════════════════════════ */
+/*SECTION 4: RSA-PSS Signing (simplified)*/
 
 /*
  * simple_hash: simplified hash for demo
@@ -223,9 +182,7 @@ int rsa_verify(const char *msg, u64 sig, RSAKey *key)
     return (recovered == m) ? 1 : 0;
 }
 
-/* ═══════════════════════════════════════════════
- * SECTION 5: Timing measurement
- * ═══════════════════════════════════════════════ */
+/* SECTION 5: Timing measurement */
 
 static long long now_ns(void)
 {
@@ -235,15 +192,13 @@ static long long now_ns(void)
     return (long long)(count.QuadPart * 1000000000LL / freq.QuadPart);
 }
 
-/* ═══════════════════════════════════════════════
- * SECTION 6: Main — sign, verify, timing test
- * ═══════════════════════════════════════════════ */
+/*SECTION 6: Main — sign, verify, timing test */
 
 int main(void)
 {
-    printf("╔══════════════════════════════════════╗\n");
-    printf("║     ConstRSA — 2020/ICT/47           ║\n");
-    printf("╚══════════════════════════════════════╝\n\n");
+    printf("\n");
+    printf("ConstRSA \n");
+    printf("\n\n");
 
     /* ── Key Generation ── */
     RSAKey key;
