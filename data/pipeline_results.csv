@@ -1,7 +1,13 @@
 metric,value
 ml_accuracy,1.0
+ml_precision,1.0
+ml_recall,1.0
+ml_f1,1.0
 verification_rate,1.0
-t_statistic,-1.7231393877212806
-p_value,0.08486645599116907
-fixed_mean_ns,2460.730427028232
-random_mean_ns,2461.355567727669
+rsa512_t_statistic,1.7340921581718445
+rsa512_p_value,0.0829328996270939
+rsa512_fixed_mean_ns,46523.504446240906
+rsa512_random_mean_ns,46057.49192245557
+ct_p_value,0.6068566134315484
+naive_p_value,0.0
+ct_overhead_pct,49.848214798797656
