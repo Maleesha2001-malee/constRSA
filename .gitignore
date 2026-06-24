@@ -1,4 +1,5 @@
-*.exe
 *.o
+bigint_test
+timing_harness
+data/*.csv
 __pycache__/
-*.pyc
