@@ -33,7 +33,7 @@ benchmark_compare: $(SRC_DIR)/bigint.c $(SRC_DIR)/baseline.c $(SRC_DIR)/benchmar
 	$(CC) $(CFLAGS) -I$(SRC_DIR) -o benchmark_compare $(SRC_DIR)/bigint.c $(SRC_DIR)/baseline.c $(SRC_DIR)/benchmark_compare.c
 
 interleaved_timing_harness: $(SRC_DIR)/bigint.c $(SRC_DIR)/interleaved_timing_harness.c
-	$(CC) $(CFLAGS) -I$(SRC_DIR) -o interleaved_timing_harness $(SRC_DIR)/bigint.c $(SRC_DIR)/interleaved_timing_harness.c
+	$(CC) $(CFLAGS) -I$(SRC_DIR) -o interleaved_timing_harness $(SRC_DIR)/bigint.c $(SRC_DIR)/interleaved_timing_harness.c -lm
 
 document_timing_harness: $(SRC_DIR)/bigint.c $(SRC_DIR)/pss.c $(SRC_DIR)/rsa_sign.c $(SRC_DIR)/document_timing_harness.c
 	$(CC) $(CFLAGS) -I$(SRC_DIR) -o document_timing_harness $(SRC_DIR)/bigint.c $(SRC_DIR)/pss.c $(SRC_DIR)/rsa_sign.c $(SRC_DIR)/document_timing_harness.c $(LDFLAGS)
