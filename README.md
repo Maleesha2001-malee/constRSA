@@ -34,8 +34,8 @@ echo "run,impl,time_ns" > data/benchmark_data.csv      # Run the Performance Ben
 ./benchmark_compare >> data/benchmark_data.csv
 python3 scripts/analyze_benchmark.py data/benchmark_data.csv
 
-chmod +x run_1000_combined.sh
-./run_1000_combined.sh
+chmod +x run_10000_combined.sh
+./run_10000_combined.sh
 ```
 
 ## Status (honest checklist — update as you go)
