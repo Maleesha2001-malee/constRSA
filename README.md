@@ -6,10 +6,36 @@ Signature with Statistical Timing-Leak Verification on Standard Laptops*
 ## Build
 
 ```bash
+sudo apt update
 sudo apt install build-essential libssl-dev python3-pip
 pip install pandas scipy --break-system-packages
+
+sudo apt-get install -y tmux   # if not already installed
+tmux new -s constrsa
+cd ~/Downloads/constRSA-main
+
+
+make clean
 make
 ./bigint_test
+./mont_test
+./modexp_test
+./crt_test
+./rsa_roundtrip_test
+./baseline_test
+
+./interleaved_timing_harness 100000 > data/timing_data.csv            #run the Timing Experiment (the main research part)
+python3 scripts/analyze_timing.py data/timing_data.csv
+
+./document_timing_harness data/corpus 50000 > data/timing_data_docs.csv   #Document-based timing experiment
+python3 scripts/analyze_timing.py data/timing_data_docs.csv
+
+echo "run,impl,time_ns" > data/benchmark_data.csv      # Run the Performance Benchmark
+./benchmark_compare >> data/benchmark_data.csv
+python3 scripts/analyze_benchmark.py data/benchmark_data.csv
+
+chmod +x run_1000_combined.sh
+./run_1000_combined.sh
 ```
 
 ## Status (honest checklist — update as you go)
