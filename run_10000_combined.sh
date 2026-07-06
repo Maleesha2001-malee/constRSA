@@ -1,25 +1,25 @@
 #!/usr/bin/env bash
 # =============================================================================
-# run_1000_combined.sh
+# run_10000_combined.sh
 #
-# Runs BOTH experiments 1000 times each with 10,000 samples per run:
+# Runs BOTH experiments 10000 times each with 10,000 samples per run:
 #   1. SYNTHETIC  — interleaved_timing_harness (fixed vs random bigints)
 #   2. REAL DOCS  — document_timing_harness    (fixed vs varied PDFs)
 #
 # Both use interleaved measurement so fixed/random share the same CPU
 # thermal/cache state — eliminating the measurement-order confound.
 #
-# Raw per-run CSVs are NOT saved (would be 2000 files). Only summary
+# Raw per-run CSVs are NOT saved (would be 20000 files). Only summary
 # CSVs and the final report are written.
 #
 # Usage:
-#   chmod +x run_1000_combined.sh
-#   ./run_1000_combined.sh
+#   chmod +x run_10000_combined.sh
+#   ./run_10000_combined.sh
 #
 # Outputs:
-#   data/syn_1000_summary.csv      — 1000 rows, one per synthetic run
-#   data/doc_1000_summary.csv      — 1000 rows, one per real-doc run
-#   data/combined_1000_report.txt  — final human-readable report
+#   data/syn_10000_summary.csv      — 10000 rows, one per synthetic run
+#   data/doc_10000_summary.csv      — 10000 rows, one per real-doc run
+#   data/combined_10000_report.txt  — final human-readable report
 # =============================================================================
 
 set -euo pipefail
